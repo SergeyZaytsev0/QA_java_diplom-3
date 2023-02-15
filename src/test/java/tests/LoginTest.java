@@ -16,7 +16,7 @@ import static org.apache.hc.core5.http.HttpStatus.SC_OK;
 import static org.junit.Assert.assertTrue;
 
 public class LoginTest {
-    MainPage main;
+    private MainPage main;
     private Credentials credentials;
     private AuthServices userClient;
     private String accessToken;
@@ -26,7 +26,6 @@ public class LoginTest {
         userClient = new AuthServices();
         User user = User.randomUser();
         credentials = Credentials.getCredentials(user);
-
         accessToken = userClient.accessToken(userClient.registerUser(user)
                 .assertThat()
                 .statusCode(SC_OK));
@@ -36,32 +35,25 @@ public class LoginTest {
     @Test
     @DisplayName("Login Through 'Sign In' Button on Main Page")
     public void checkLoginThroughSignInButtonOnMainPage() {
-
         main
                 .clickSignInButton()
                 .enterEmail(credentials.getEmail())
                 .enterPassword(credentials.getPassword())
                 .loginButtonClick();
-
         boolean button = main.isPlaceOrderButtonVisible();
-
         webdriver().shouldHave(url("https://stellarburgers.nomoreparties.site/"));
         assertTrue("Button invisible", button);
-
     }
 
     @Test
     @DisplayName("Login Through 'Personal Account' Button")
     public void checkLoginThroughPersonalAccountButton() {
-
         main
                 .clickPersonalAccountButton()
                 .enterEmail(credentials.getEmail())
                 .enterPassword(credentials.getPassword())
                 .loginButtonClick();
-
         boolean button = main.isPlaceOrderButtonVisible();
-
         webdriver().shouldHave(url("https://stellarburgers.nomoreparties.site/"));
         assertTrue("Button invisible", button);
     }
@@ -69,7 +61,6 @@ public class LoginTest {
     @Test
     @DisplayName("Login Through Button in Registration Form")
     public void checkLoginThroughButtonInRegistrationForm() {
-
         main
                 .clickSignInButton()
                 .clickLoginButton()
@@ -77,9 +68,7 @@ public class LoginTest {
                 .enterEmail(credentials.getEmail())
                 .enterPassword(credentials.getPassword())
                 .loginButtonClick();
-
         boolean button = main.isPlaceOrderButtonVisible();
-
         webdriver().shouldHave(url("https://stellarburgers.nomoreparties.site/"));
         assertTrue("Button invisible", button);
     }
@@ -87,7 +76,6 @@ public class LoginTest {
     @Test
     @DisplayName("Login Through Button in Password Recovery Form")
     public void checkLoginThroughButtonInPasswordRecoveryForm() {
-
         main
                 .clickSignInButton()
                 .resetPasswordLinkClick()
@@ -95,9 +83,7 @@ public class LoginTest {
                 .enterEmail(credentials.getEmail())
                 .enterPassword(credentials.getPassword())
                 .loginButtonClick();
-
         boolean button = main.isPlaceOrderButtonVisible();
-
         webdriver().shouldHave(url("https://stellarburgers.nomoreparties.site/"));
         assertTrue("Button invisible", button);
     }

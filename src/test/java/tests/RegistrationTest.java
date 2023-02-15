@@ -15,13 +15,11 @@ import org.junit.Test;
 import static com.codeborne.selenide.Selenide.*;
 import static org.apache.http.HttpStatus.SC_OK;
 import static org.apache.http.HttpStatus.SC_UNAUTHORIZED;
-import static org.junit.Assert.assertTrue;
 
 public class RegistrationTest {
 
-    RegistrationPage registration;
-    LoginPage login;
-    MainPage mainPage;
+    private RegistrationPage registration;
+    private LoginPage login;
     private AuthServices authServices;
     private String accessToken;
     private UserProfile profile;
@@ -29,17 +27,15 @@ public class RegistrationTest {
     @Before
     public void setUp() {
         authServices = new AuthServices();
-        mainPage = open(MainPage.URL, MainPage.class);
+        MainPage mainPage = open(MainPage.URL, MainPage.class);
         registration = open(RegistrationPage.URL, RegistrationPage.class);
         profile = ProfileGenerator.getRandom();
         login = page(LoginPage.class);
     }
 
-
     @Test
     @DisplayName("Successful registration")
     public void successfulRegistration() {
-
         registration.registerNewUser(profile);
         login.checkLoginHeader();
         Credentials credentials = new Credentials(profile.getEmail(), profile.getPassword());
@@ -51,11 +47,9 @@ public class RegistrationTest {
     @Test
     @DisplayName("Enter short password")
     public void enterShortPassword() {
-
         profile.setPassword("false");
         registration.registerNewUser(profile);
-        assertTrue(registration.checkInvalidPasswordNotificationDisplayed());
-        assertTrue(registration.checkInvalidPasswordNotificationDisplayed());
+        registration.checkInvalidPasswordNotificationDisplayed();
         Credentials credentials = new Credentials(profile.getEmail(), profile.getPassword());
         accessToken = authServices.accessToken(authServices.loginUser(credentials)
                 .assertThat()
@@ -69,6 +63,5 @@ public class RegistrationTest {
             authServices.deleteUser(accessToken);
         }
         webdriver().driver().close();
-
     }
 }

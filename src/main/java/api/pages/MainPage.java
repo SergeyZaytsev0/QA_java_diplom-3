@@ -14,28 +14,28 @@ public class MainPage {
     public static final String URL = "https://stellarburgers.nomoreparties.site/";
 
     @FindBy(how = How.CSS, using = ".AppHeader_header__logo__2D0X2 ~ a")
-    protected SelenideElement linkToProfilePage;
+    private SelenideElement linkToProfilePage;
 
     @FindBy(how = How.XPATH, using = "//p[text()='Конструктор']")
-    protected SelenideElement constructorLabel;
+    private SelenideElement constructorLabel;
 
     @FindBy(how = How.XPATH, using = ".//span [@class='text text_type_main-default'][text()='Булки']")
-    protected SelenideElement bunsTab;
+    private SelenideElement bunsTab;
 
     @FindBy(how = How.XPATH, using = ".//span[text()='Булки']")
-    protected SelenideElement bunsTitle;
+    private SelenideElement bunsTitle;
 
     @FindBy(how = How.XPATH, using = ".//span [@class='text text_type_main-default'][text()='Соусы']")
-    protected SelenideElement saucesTab;
+    private SelenideElement saucesTab;
 
     @FindBy(how = How.XPATH, using = ".//span[text()='Соусы']")
-    protected SelenideElement saucesTitle;
+    private SelenideElement saucesTitle;
 
     @FindBy(how = How.XPATH, using = ".//span [@class='text text_type_main-default'][text()='Начинки']")
-    protected SelenideElement fillingsTab;
+    private SelenideElement fillingsTab;
 
     @FindBy(how = How.XPATH, using = ".//span[text()='Начинки']")
-    protected SelenideElement fillingsTitle;
+    private SelenideElement fillingsTitle;
 
     @FindBy(how = How.XPATH, using = ".//button [text()='Войти в аккаунт']")
     private SelenideElement loginButton;

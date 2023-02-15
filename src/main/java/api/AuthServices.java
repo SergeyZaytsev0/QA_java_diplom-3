@@ -9,11 +9,7 @@ import static api.Spec.getBaseSpec;
 import static org.apache.http.HttpStatus.SC_ACCEPTED;
 
 public class AuthServices {
-
     private final String ROOT = "/auth";
-    private final String LOGIN = ROOT + "/login";
-    private final String USER = ROOT + "/user";
-    private final String REGISTER = ROOT + "/register";
 
     @Step("Obtain access token")
     public String accessToken(ValidatableResponse response) {
@@ -24,6 +20,7 @@ public class AuthServices {
 
     @Step("Perform registration")
     public ValidatableResponse registerUser(User user) {
+        String REGISTER = ROOT + "/register";
         return getBaseSpec
                 .body(user).log().all()
                 .when()
@@ -33,6 +30,7 @@ public class AuthServices {
 
     @Step("Perform login")
     public ValidatableResponse loginUser(Credentials credentials) {
+        String LOGIN = ROOT + "/login";
         return getBaseSpec
                 .body(credentials).log().all()
                 .when()
@@ -46,6 +44,7 @@ public class AuthServices {
 
     @Step("Delete user by token")
     public void deleteUser(String token) {
+        String USER = ROOT + "/user";
         getBaseSpec
                 .auth().oauth2(extractToken(token))
                 .when()

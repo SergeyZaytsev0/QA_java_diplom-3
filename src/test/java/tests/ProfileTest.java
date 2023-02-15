@@ -15,11 +15,9 @@ import static com.codeborne.selenide.Selenide.*;
 import static org.apache.hc.core5.http.HttpStatus.SC_OK;
 
 public class ProfileTest {
-
-    MainPage main;
-    ProfilePage profile;
-    LoginPage loginClass;
-    private Credentials credentials;
+    private MainPage main;
+    private ProfilePage profile;
+    private LoginPage loginClass;
     private AuthServices userClient;
     private String accessToken;
 
@@ -27,12 +25,10 @@ public class ProfileTest {
     public void setUp() {
         userClient = new AuthServices();
         User user = User.randomUser();
-        credentials = Credentials.getCredentials(user);
-
+        Credentials credentials = Credentials.getCredentials(user);
         accessToken = userClient.accessToken(userClient.registerUser(user)
                 .assertThat()
                 .statusCode(SC_OK));
-
         loginClass = page(LoginPage.class);
         profile = page(ProfilePage.class);
         main = open(MainPage.URL, MainPage.class);
@@ -46,7 +42,6 @@ public class ProfileTest {
     @Test
     @DisplayName("Go to personal account")
     public void personalAccount() {
-
         main.
                 goToProfilePage();
         profile.
@@ -56,11 +51,9 @@ public class ProfileTest {
     @Test
     @DisplayName("Exit from personal account")
     public void exitFromPersonalAccount() {
-
         main.goToProfilePage();
         profile.clickSignOutButton();
         loginClass.checkAuthorizationVisibility();
-
     }
 
     @After

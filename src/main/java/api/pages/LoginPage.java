@@ -11,15 +11,18 @@ import static com.codeborne.selenide.Selenide.page;
 
 public class LoginPage {
 
-
     @FindBy(how = How.CSS, using = "[name=\"name\"]")
-    protected SelenideElement emailInput;
+    private SelenideElement emailInput;
+
     @FindBy(how = How.CSS, using = ".Auth_login__3hAey > h2")
-    protected SelenideElement loginHeader;
+    private SelenideElement loginHeader;
+
     @FindBy(how = How.CSS, using = "[name=\"Пароль\"]")
-    protected SelenideElement passwordInput;
+    private SelenideElement passwordInput;
+
     @FindBy(how = How.XPATH, using = ".//button [text()='Войти']")
     private SelenideElement loginButton;
+
     @FindBy(how = How.XPATH, using = ".//fieldset[1]//input")
     private SelenideElement inputName;
 
@@ -86,7 +89,6 @@ public class LoginPage {
         return this;
     }
 
-
     @Step("Click 'Constructor' button")
     public LoginPage clickConstructorButton() {
         constructorButton.click();
@@ -114,6 +116,5 @@ public class LoginPage {
     public void checkAuthorizationVisibility() {
         loginButton.shouldBe(Condition.visible);
     }
-
 
 }

@@ -16,8 +16,7 @@ import static com.codeborne.selenide.Selenide.page;
 import static org.apache.hc.core5.http.HttpStatus.SC_OK;
 
 public class ConstructorTest {
-
-    MainPage main;
+    private MainPage main;
     private AuthServices userClient;
     private String accessToken;
 
@@ -26,11 +25,9 @@ public class ConstructorTest {
         userClient = new AuthServices();
         User user = User.randomUser();
         Credentials credentials = Credentials.getCredentials(user);
-
         accessToken = userClient.accessToken(userClient.registerUser(user)
                 .assertThat()
                 .statusCode(SC_OK));
-
         main = open(MainPage.URL, MainPage.class);
         main
                 .clickSignInButton()
@@ -42,20 +39,15 @@ public class ConstructorTest {
     @Test
     @DisplayName("Check transition via constructor and logo")
     public void checkTransitionConstructorLogo() {
-
         main.goToProfilePage();
-
         ProfilePage profile = page(ProfilePage.class);
         profile.navigateToLogoBuilderPage();
-
         main.checkConstructorBlockVisibility();
-
     }
 
     @Test
     @DisplayName("Check transition to Buns section")
     public void checkTransitionBuns() {
-
         main
                 .clickOnFillingsSection()
                 .clickOnBunsSection()
@@ -73,7 +65,6 @@ public class ConstructorTest {
     @Test
     @DisplayName("Check transition to Fillings section")
     public void checkTransitionFillings() {
-
         main
                 .clickOnFillingsSection()
                 .isFillingsSectionVisible();
